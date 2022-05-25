@@ -1,5 +1,4 @@
 'use strict'
-console.log('game')
 
 const BOARD_SIZE = 14
 const ALIENS_ROW_LENGTH = 8
@@ -9,6 +8,11 @@ const ALIEN = '👽'
 const LASER = '⤊'
 const SKY = 'sky'
 const EARTH = 'earth'
+
+var gLaserPos = { i: 11, j: 5 }
+
+//TO DO:gIntervalLaser
+var gLaserInterval
 
 // Matrix of cell objects. e.g.: {type: SKY, gameObject: ALIEN} 
 var gBoard
@@ -20,9 +24,14 @@ var gGame = {
 
 function init() {
     gBoard = createBoard()
+
     createHero(gBoard)
+
+
     createAliens(gBoard)
+
     renderBoard(gBoard)
+
     console.table(gBoard)
 }
 // Create and returns the board with aliens on top, ground at bottom // use the functions: createCell, createHero, createAliens 
@@ -40,6 +49,7 @@ function createBoard() {
         }
         board.push(row)
     }
+    board[gHero.pos.i - 1][gHero.pos.j].gameObject = LASER
     return board
 }
 
@@ -54,14 +64,19 @@ function renderBoard(board) {
             var pos = { i: i, j: j }
             strHTML += `\t<td data-i=${pos.i} data-j=${pos.j}>\n`;
 
-            if (currCell.gameObject === ALIEN) {
-                //update DOM with aliens
+            if (currCell.gameObject === ALIEN)
+            //update DOM with aliens
                 strHTML += ALIEN
-            } else if (i === 12) {
-                //update DOM with hero
-                strHTML += `\t<td data-i=${pos.i} data-j=${pos.j}>\n`;
-                if (i === gHero.pos.i && j === gHero.pos.j)
-                    strHTML += HERO
+
+
+            if (i === gHero.pos.i && j === gHero.pos.j)
+            //update DOM with hero
+                strHTML += HERO
+
+
+            if (currCell.gameObject === LASER) {
+                strHTML += LASER
+                console.log(gLaserPos)
             }
             strHTML += '\t</td>\n';
         }

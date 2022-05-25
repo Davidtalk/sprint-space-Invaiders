@@ -1,5 +1,4 @@
 'use strict'
-console.log('util')
 
 // Returns a new cell object. e.g.: {type: SKY, gameObject: ALIEN} 
 function createCell(gameObject = null) {
@@ -15,4 +14,5 @@ function updateCell(pos, gameObject = null) {
     gBoard[pos.i][pos.j].gameObject = gameObject
     var elCell = getElCell(pos)
     elCell.innerHTML = gameObject
+
 }

@@ -1,5 +1,4 @@
 'use strict'
-console.log('alien')
 
 const ALIEN_SPEED = 500;
 
@@ -13,9 +12,14 @@ var gIsAlienFreeze = true;
 function createAliens(board) {
     for (var i = 0; i < board.length; i++) {
         for (var j = 0; j < board.length; j++) {
-            if (i < 3 && j < ALIENS_ROW_LENGTH) board[i][j].gameObject = ALIEN
+            if (i < 3 && j < ALIENS_ROW_LENGTH) {
+                board[i][j].gameObject = ALIEN
+                gGame.aliensCount++
+            }
+
         }
     }
+    console.log('gGame.aliensCount ', gGame.aliensCount)
 }
 
 

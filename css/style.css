@@ -8,3 +8,11 @@ body {
     text-align: center;
     font-size: 1.4em;
 }
+
+.hero {
+    color: blueviolet;
+}
+
+.laser {
+    display: block;
+}
