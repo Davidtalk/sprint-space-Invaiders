@@ -9,80 +9,96 @@ const LASER = '⤊'
 const SKY = 'sky'
 const EARTH = 'earth'
 
-var gLaserPos = { i: 11, j: 5 }
 
-//TO DO:gIntervalLaser
+
+//Done:gIntervalLaser
 var gLaserInterval
 
 // Matrix of cell objects. e.g.: {type: SKY, gameObject: ALIEN} 
 var gBoard
 
 var gGame = {
-        isOn: false,
-        aliensCount: 0
-    } // Called when game loads
+    isOn: false,
+    aliensCount: 0
+}
+
+// Called when game loads
 
 function init() {
+
+    gGame.isOn = true
+
     gBoard = createBoard()
 
     createHero(gBoard)
-
 
     createAliens(gBoard)
 
     renderBoard(gBoard)
 
+    moveAliens(gBoard, 0, 1)
+
     console.table(gBoard)
+
 }
-// Create and returns the board with aliens on top, ground at bottom // use the functions: createCell, createHero, createAliens 
+
 function createBoard() {
+
     var board = []
     var cell
+
     for (var i = 0; i < BOARD_SIZE; i++) {
+
         var row = []
+
         for (var j = 0; j < BOARD_SIZE; j++) {
+
             cell = createCell()
+
             if (i === BOARD_SIZE - 1) {
+
                 cell.type = EARTH
             }
             row.push(cell)
         }
         board.push(row)
     }
-    board[gHero.pos.i - 1][gHero.pos.j].gameObject = LASER
+
     return board
 }
 
 // Render the board as a <table> to the page 
 function renderBoard(board) {
 
-    var strHTML = '';
+    var strHTML = ''
+
     for (var i = 0; i < board.length; i++) {
-        strHTML += '<tr>\n';
+
+        strHTML += '<tr>\n'
+
         for (var j = 0; j < board[0].length; j++) {
-            var currCell = board[i][j];
+
+            var currCell = board[i][j]
+
             var pos = { i: i, j: j }
+
             strHTML += `\t<td data-i=${pos.i} data-j=${pos.j}>\n`;
 
             if (currCell.gameObject === ALIEN)
             //update DOM with aliens
                 strHTML += ALIEN
 
-
             if (i === gHero.pos.i && j === gHero.pos.j)
+
             //update DOM with hero
                 strHTML += HERO
 
-
-            if (currCell.gameObject === LASER) {
-                strHTML += LASER
-                console.log(gLaserPos)
-            }
             strHTML += '\t</td>\n';
         }
         strHTML += '</tr>\n';
 
     }
+
     var elMat = document.querySelector('.game-board')
     elMat.innerHTML = strHTML
 }
