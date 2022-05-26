@@ -1,6 +1,6 @@
 'use strict'
 
-const LASER_SPEED = 80;
+var laserSpeed = 80;
 
 var gLaserPos
 
@@ -8,7 +8,10 @@ var gLaserInterval
 
 var gHero = { pos: { i: 12, j: 5 }, isShoot: false };
 
-// creates the hero and place it on board 
+var gLaserNegs
+
+var gSuperModeCount = 3
+    // creates the hero and place it on board 
 function createHero(board) {
 
     board[gHero.pos.i][gHero.pos.j].gameObject = HERO
@@ -17,8 +20,13 @@ function createHero(board) {
 
 // Handle game keys 
 function onKeyDown(ev) {
+    var elBtn = document.querySelector('button')
+
+
+
     if (!gGame.isOn) return
     clearInterval(gLaserInterval)
+    console.log('ev ', ev)
 
     var i = gHero.pos.i - 1
     var j = gHero.pos.j
@@ -28,6 +36,9 @@ function onKeyDown(ev) {
     if (ev.code === 'Space' &&
         gLaserPos.i > 0 &&
         gBoard[0][j].gameObject !== null) {
+        gHero.isShoot = true
+        if (gHero.isShoot) elBtn.display = 'none'
+
         shoot()
     }
 
@@ -36,7 +47,13 @@ function onKeyDown(ev) {
             moveHero(j - 1)
             break;
         case 'ArrowRight':
-            moveHero(j + 1);
+            moveHero(j + 1)
+            break;
+        case 'n':
+            blowUpNeighbors(gLaserNegs)
+            break;
+        case 'x':
+            superMode()
             break;
     }
 }
@@ -76,7 +93,7 @@ function shoot() {
 
         blinkLaser(gLaserPos)
 
-    }, LASER_SPEED)
+    }, laserSpeed)
 
     gLaserPos.j === gHero.pos.j
 
@@ -89,6 +106,8 @@ function blinkLaser(pos) {
 
         handleAlienHit(pos)
 
+        gLaserNegs = pos
+
         gHero.isShoot = false
 
         updateCell(pos)
@@ -97,7 +116,7 @@ function blinkLaser(pos) {
 
     }
 
-    updateCell(pos, LASER)
+    updateCell(pos, gLaser)
 
     console.log(pos)
 
@@ -113,8 +132,23 @@ function blinkLaser(pos) {
     console.log(gBoard)
 }
 
-function isShoot() {
+function blowUpNeighbors(pos) {
+    findNeighbors(pos)
+}
 
+function superMode() {
+    var elSuperMode = document.querySelector('.super1')
+    console.log(elSuperMode)
+    if (gSuperModeCount > 0) {
+        gSuperModeCount--
+        elSuperMode.innertext === gSuperModeCount
 
+        laserSpeed /= 2
+        gLaser = '^'
+    } else if (gSuperModeCount === 0) {
+        gLaser = '⤊'
+        laserSpeed = 80
+        return
+    }
 
 }

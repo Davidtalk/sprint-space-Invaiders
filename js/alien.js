@@ -27,12 +27,14 @@ function createAliens(board) {
 
 function handleAlienHit(pos) {
 
-    var elVictory = document.querySelector('h1 span')
+    var elVictory = document.querySelector('.victory')
 
     elVictory.style.display = 'none'
 
     var elMesseg = document.querySelector('h5')
 
+    var elBtn = document.querySelector('button')
+    console.log(elBtn)
 
 
 
@@ -43,6 +45,7 @@ function handleAlienHit(pos) {
 
             elVictory.style.display = 'block'
             elMesseg.innerText = 'you have saved planet earth'
+            elBtn.innerText = 'restart'
 
 
             //gHero.isShoot = false
@@ -58,25 +61,25 @@ function shiftBoardRight(board, fromI, toI) {
 
 
 
-
-
-
-
-
-    // updateCell({ i: 0, j: 0 })
-    // updateCell({ i: 0, j: 8 }, ALIEN)
-    //     // updateCell({ i: 0, j: 1 })
-    //     // updateCell({ i: 0, j: 9 }, ALIEN)
-    //     // updateCell({ i: 0, j: 2 })
-    //     // updateCell({ i: 0, j: 10 }, ALIEN)
-    // updateCell({ i: 0, j: 3 })
-    // updateCell({ i: 0, j: 11 }, ALIEN)
-    // updateCell({ i: 0, j: 4 })
-    // updateCell({ i: 0, j: 12 }, ALIEN)
-    // updateCell({ i: 0, j: 5 })
-    // updateCell({ i: 0, j: 13 }, ALIEN)
-
 }
+
+
+
+
+
+
+//     // updateCell({ i: 0, j: 1 })
+//     // updateCell({ i: 0, j: 9 }, ALIEN)
+//     // updateCell({ i: 0, j: 2 })
+//     // updateCell({ i: 0, j: 10 }, ALIEN)
+// updateCell({ i: 0, j: 3 })
+// updateCell({ i: 0, j: 11 }, ALIEN)
+// updateCell({ i: 0, j: 4 })
+// updateCell({ i: 0, j: 12 }, ALIEN)
+// updateCell({ i: 0, j: 5 })
+// updateCell({ i: 0, j: 13 }, ALIEN)
+
+
 
 function shiftBoardLeft(board, fromI, toI) {
     updateCell()
@@ -90,9 +93,6 @@ function shiftBoardDown(board, fromI, toI) {
 
 // runs the interval for moving aliens side to side and down // it re-renders the board every time // when the aliens are reaching the hero row - interval stops
 function moveAliens(board, fromI, toI) {
-
-
-
 
 
 }

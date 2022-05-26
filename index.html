@@ -10,8 +10,17 @@
 </head>
 
 <body onkeydown="onKeyDown(event)" onload="init()">
-    <h1><span>VICTORY</span></h1>
+    <h1><span class="victory">VICTORY</span></h1>
+    <button ondblclick="isGameOn(this)" class="startBtn">start</button>
     <h5>stop the invaision</h5>
+    <div class="modal">
+
+        <h2>super mode
+            <p><span class="super1">3</span></p>
+
+        </h2>
+
+    </div>
     <table class="game-board"></table>
     <script src="js/util.js"></script>
     <script src="js/game.js"></script>

@@ -5,10 +5,10 @@ const ALIENS_ROW_LENGTH = 8
 const ALIENS_ROW_COUNT = 3
 const HERO = '♆'
 const ALIEN = '👽'
-const LASER = '⤊'
 const SKY = 'sky'
 const EARTH = 'earth'
 
+var gLaser = '⤊'
 
 
 //Done:gIntervalLaser
@@ -26,7 +26,11 @@ var gGame = {
 
 function init() {
 
-    gGame.isOn = true
+    gGame.aliensCount = 0
+
+
+    gGame.isOn = false
+
 
     gBoard = createBoard()
 
@@ -36,9 +40,16 @@ function init() {
 
     renderBoard(gBoard)
 
-    moveAliens(gBoard, 0, 1)
 
     console.table(gBoard)
+
+}
+
+function isGameOn(elBtn) {
+    init()
+    console.log(elBtn)
+
+    gGame.isOn = true
 
 }
 
