@@ -11,17 +11,18 @@
 
 <body onkeydown="onKeyDown(event)" onload="init()">
     <h1><span class="victory">VICTORY</span></h1>
-    <button ondblclick="isGameOn(this)" class="startBtn">start</button>
+    <button ondblclick="isGameOn(this)">start</button>
     <h5>stop the invaision</h5>
     <div class="modal">
 
         <h2>super mode
-            <p><span class="super1">3</span></p>
+            <p><span class="super1"></span></p>
 
         </h2>
 
     </div>
     <table class="game-board"></table>
+    <button onclick="freez()" class="shift">freez</button>
     <script src="js/util.js"></script>
     <script src="js/game.js"></script>
     <script src="js/hero.js"></script>

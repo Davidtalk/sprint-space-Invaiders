@@ -2,11 +2,17 @@ body {
     text-align: center;
 }
 
+.game-board {
+    margin: auto;
+    background-color: black;
+}
+
 .game-board td {
     width: 40px;
     height: 40px;
     text-align: center;
     font-size: 1.4em;
+    color: aliceblue;
 }
 
 .hero {
@@ -17,21 +23,26 @@ body {
     display: none;
 }
 
-.startBtn {
+
+/* .startBtn {
     display: block;
     margin: auto;
-}
+} */
 
 .modal {
     background-color: lightseagreen;
     display: block;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 299px;
+    right: 0px;
     padding: 5px;
-    width: 300px;
+    width: 256px;
 }
 
 .super1 {
     display: block;
+}
+
+.shift {
+    margin: auto;
 }

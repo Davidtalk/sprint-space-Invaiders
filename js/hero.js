@@ -1,6 +1,8 @@
 'use strict'
 
-var laserSpeed = 80;
+
+
+var gLaserSpeed
 
 var gLaserPos
 
@@ -20,11 +22,18 @@ function createHero(board) {
 
 // Handle game keys 
 function onKeyDown(ev) {
-    var elBtn = document.querySelector('button')
+    // var elBtn = document.querySelector('.startBtn')
+
+    // elBtn.display = 'none'
+
+    if (!gGame.isOn) {
+        !gHero.shoot
+    } else {
+        gHero.shoot
+    }
 
 
 
-    if (!gGame.isOn) return
     clearInterval(gLaserInterval)
     console.log('ev ', ev)
 
@@ -32,15 +41,17 @@ function onKeyDown(ev) {
     var j = gHero.pos.j
 
     gLaserPos = { i, j }
-
-    if (ev.code === 'Space' &&
+    if (gGame.shoot && ev.code === 'Space' && gLaserPos.i > 0 &&
+        gBoard[0][j].gameObject !== null) {
+        gLaser = '⤊'
+        gLaserSpeed = 80
+        shoot()
+    } else if (gGame.shoot && ev.code === 'KeyX' &&
         gLaserPos.i > 0 &&
         gBoard[0][j].gameObject !== null) {
-        gHero.isShoot = true
-        if (gHero.isShoot) elBtn.display = 'none'
-
-        shoot()
+        superMode()
     }
+
 
     switch (ev.key) {
         case 'ArrowLeft':
@@ -51,9 +62,6 @@ function onKeyDown(ev) {
             break;
         case 'n':
             blowUpNeighbors(gLaserNegs)
-            break;
-        case 'x':
-            superMode()
             break;
     }
 }
@@ -88,12 +96,12 @@ function shoot() {
                 gLaserPos.i = 11
 
                 //updateCell(gLaserPos)
-                clearInterval(gLaserInterval)
+                //clearInterval(gLaserInterval)
             }
 
         blinkLaser(gLaserPos)
 
-    }, laserSpeed)
+    }, gLaserSpeed)
 
     gLaserPos.j === gHero.pos.j
 
@@ -137,18 +145,30 @@ function blowUpNeighbors(pos) {
 }
 
 function superMode() {
-    var elSuperMode = document.querySelector('.super1')
-    console.log(elSuperMode)
-    if (gSuperModeCount > 0) {
-        gSuperModeCount--
-        elSuperMode.innertext === gSuperModeCount
 
-        laserSpeed /= 2
+    var elSuperMode = document.querySelector('.super1')
+
+    elSuperMode.innerHTML = gSuperModeCount
+
+    if (gSuperModeCount > 0) {
+
+        gSuperModeCount--
+
+        elSuperMode.innerHTML = gSuperModeCount
+
+        console.log('gSuperModeCount ', gSuperModeCount)
+
+        gLaserSpeed = 40
+
         gLaser = '^'
+
+        shoot()
+
     } else if (gSuperModeCount === 0) {
-        gLaser = '⤊'
-        laserSpeed = 80
+
         return
+
     }
+
 
 }

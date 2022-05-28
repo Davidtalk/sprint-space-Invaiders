@@ -21,7 +21,7 @@ function updateCell(pos, gameObject = null) {
 }
 
 function findNeighbors({ i, j }) {
-    console.log('hidfj')
+
     var rowIdx = i
 
     var colIdx = j
@@ -46,4 +46,32 @@ function findNeighbors({ i, j }) {
         }
     }
 
+}
+
+function getEmptyCell() {
+    var emptyCells = []
+    for (var i = gAliensTopRowIdx; i < gBoard.length; i++) {
+        for (var j = 0; j < gBoard.length; j++) {
+            if (gBoard[i][j].gameObject === null) {
+                emptyCells.push({ i, j })
+            }
+
+        }
+    }
+
+    return emptyCells
+}
+
+function getAlienCell() {
+    var emptyCells = []
+    for (var i = 0; i < gBoard.length; i++) {
+        for (var j = 0; j < gBoard.length; j++) {
+            if (gBoard[i][j].gameObject === ALIEN) {
+                emptyCells.push({ i, j })
+            }
+
+        }
+    }
+
+    return emptyCells
 }

@@ -7,8 +7,10 @@ const HERO = '♆'
 const ALIEN = '👽'
 const SKY = 'sky'
 const EARTH = 'earth'
+const EMPTY = ' '
 
-var gLaser = '⤊'
+
+var gLaser
 
 
 //Done:gIntervalLaser
@@ -19,18 +21,20 @@ var gBoard
 
 var gGame = {
     isOn: false,
-    aliensCount: 0
+    aliensCount: 0,
 }
 
 // Called when game loads
 
 function init() {
 
+    var elSuperMode = document.querySelector('.super1')
+
+    elSuperMode.innerHTML = gSuperModeCount
+
     gGame.aliensCount = 0
 
-
     gGame.isOn = false
-
 
     gBoard = createBoard()
 
@@ -41,21 +45,28 @@ function init() {
     renderBoard(gBoard)
 
 
+
     console.table(gBoard)
 
 }
 
 function isGameOn(elBtn) {
+
     init()
-    console.log(elBtn)
+
+    elBtn.style.display = 'none'
 
     gGame.isOn = true
 
+    gGame.shoot = true
+
+    moveAliens()
 }
 
 function createBoard() {
 
     var board = []
+
     var cell
 
     for (var i = 0; i < BOARD_SIZE; i++) {
@@ -66,10 +77,12 @@ function createBoard() {
 
             cell = createCell()
 
-            if (i === BOARD_SIZE - 1) {
+            if (i === BOARD_SIZE - 2) {
 
                 cell.type = EARTH
             }
+
+
             row.push(cell)
         }
         board.push(row)
@@ -77,6 +90,7 @@ function createBoard() {
 
     return board
 }
+
 
 // Render the board as a <table> to the page 
 function renderBoard(board) {
@@ -99,6 +113,8 @@ function renderBoard(board) {
             //update DOM with aliens
                 strHTML += ALIEN
 
+
+
             if (i === gHero.pos.i && j === gHero.pos.j)
 
             //update DOM with hero
@@ -112,4 +128,8 @@ function renderBoard(board) {
 
     var elMat = document.querySelector('.game-board')
     elMat.innerHTML = strHTML
+}
+
+function freez() {
+    clearInterval(gIntervalAliens)
 }
